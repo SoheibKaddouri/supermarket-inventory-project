@@ -33,7 +33,7 @@ This project requires no complex installation or dependencies.
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/SoheibKaddouri/supermarket-inventory-project.git](https://github.com/SoheibKaddouri/supermarket-inventory-project.git)
+    git clone https://github.com/SoheibKaddouri/supermarket-inventory-project.git
     ```
 2.  **Navigate to the project directory:**
     ```bash
