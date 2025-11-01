@@ -49,3 +49,12 @@ This project is deployed and hosted for free using **GitHub Pages**.
 > https://github.com/SoheibKaddouri/supermarket-inventory-project
 
 ---
+
+
+## 🤝 Contribution
+
+This is a personal project, but suggestions and feedback are welcome!
+
+***
+
+**Soheib Kaddouri** / **SoheibKaddouri**
