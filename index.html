@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Supermarket Inventory</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+#controls button {
+    margin-right: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+form input {
+    margin: 5px;
+    padding: 5px;
+}
+
+form button {
+    padding: 5px 10px;
+}
+
+#inventory {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+</style>
+</head>
+<body>
+<h1>Supermarket Inventory</h1>
+
+<div id="controls">
+    <button onclick="displayAllItems()">List All Items</button>
+    <button onclick="displayLowStock()">Low Stock Items</button>
+    <button onclick="displayAboutToExpire()">About to Expire</button>
+</div>
+
+<div id="inventory"></div>
+
+<h2>Add New Item</h2>
+<form id="addItemForm">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="date" id="bestBefore" placeholder="Best Before Date" required>
+    <input type="number" id="quantity" placeholder="Quantity" required>
+    <input type="number" step="0.01" id="price" placeholder="Price" required>
+    <input type="text" id="category" placeholder="Category" required>
+    <button type="submit">Add Item</button>
+</form>
+
+<h2>Search Items</h2>
+<form id="searchForm">
+    <input type="text" id="searchName" placeholder="Name">
+    <input type="text" id="searchCategory" placeholder="Category">
+    <button type="submit">Search</button>
+</form>
+
+<script>
+// Sample data
+let items = [
+  {"Name": "Milk", "BestBeforeDate": "2023-11-10", "Quantity": 21, "Price": 1.12, "Category": "Dairy"},
+  {"Name": "Chicken", "BestBeforeDate": "2023-11-11", "Quantity": 3, "Price": 3.49, "Category": "Meat&Fish"},
+  {"Name": "Tomatoes", "BestBeforeDate": "2023-11-13", "Quantity": 5, "Price": 0.89, "Category": "Vegetable&Fruit"},
+  {"Name": "Ice-Cream", "BestBeforeDate": "2024-07-07", "Quantity": 10, "Price": 4.59, "Category": "Freezer"},
+  {"Name": "Nutella", "BestBeforeDate": "2023-12-11", "Quantity": 4, "Price": 3.99, "Category": "Bread&Spreads"},
+  {"Name": "Peanuts", "BestBeforeDate": "2025-04-01", "Quantity": 13, "Price": 1.49, "Category": "Dried-Goods"},
+  {"Name": "Pringles", "BestBeforeDate": "2025-11-01", "Quantity": 1, "Price": 1.99, "Category": "Snacks"},
+  {"Name": "Shampoo", "BestBeforeDate": "2026-01-01", "Quantity": 5, "Price": 2.99, "Category": "Care-Products"}
+];
+
+// Display items in a table
+function renderItems(list) {
+    const inventory = document.getElementById("inventory");
+    if(list.length === 0){
+        inventory.innerHTML = "<p>No items found.</p>";
+        return;
+    }
+
+    let html = "<table><tr><th>Name</th><th>Best Before</th><th>Quantity</th><th>Price</th><th>Category</th><th>Actions</th></tr>";
+    list.forEach((item, index) => {
+        html += `<tr>
+                    <td>${item.Name}</td>
+                    <td>${item.BestBeforeDate}</td>
+                    <td>${item.Quantity}</td>
+                    <td>${item.Price.toFixed(2)}</td>
+                    <td>${item.Category}</td>
+                    <td>
+                        <button onclick="editItem(${index})">Edit</button>
+                        <button onclick="deleteItem(${index})">Delete</button>
+                    </td>
+                </tr>`;
+    });
+    html += "</table>";
+    inventory.innerHTML = html;
+}
+
+// Display all items
+function displayAllItems() {
+    renderItems(items);
+}
+
+// Display low stock items (<5)
+function displayLowStock() {
+    const lowStock = items.filter(item => item.Quantity < 5);
+    renderItems(lowStock);
+}
+
+// Display items about to expire in 30 days
+function displayAboutToExpire() {
+    const today = new Date();
+    const threshold = new Date();
+    threshold.setDate(today.getDate() + 30);
+
+    const aboutToExpire = items.filter(item => {
+        const date = new Date(item.BestBeforeDate);
+        return date <= threshold && date >= today;
+    });
+
+    renderItems(aboutToExpire);
+}
+
+// Add new item
+document.getElementById("addItemForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const newItem = {
+        Name: document.getElementById("name").value,
+        BestBeforeDate: document.getElementById("bestBefore").value,
+        Quantity: parseInt(document.getElementById("quantity").value),
+        Price: parseFloat(document.getElementById("price").value),
+        Category: document.getElementById("category").value
+    };
+    items.push(newItem);
+    renderItems(items);
+    this.reset();
+});
+
+// Delete item
+function deleteItem(index){
+    if(confirm("Are you sure you want to delete this item?")){
+        items.splice(index,1);
+        renderItems(items);
+    }
+}
+
+// Edit item
+function editItem(index){
+    const item = items[index];
+    const newName = prompt("Name:", item.Name);
+    const newDate = prompt("Best Before Date:", item.BestBeforeDate);
+    const newQuantity = prompt("Quantity:", item.Quantity);
+    const newPrice = prompt("Price:", item.Price);
+    const newCategory = prompt("Category:", item.Category);
+
+    if(newName) item.Name = newName;
+    if(newDate) item.BestBeforeDate = newDate;
+    if(newQuantity) item.Quantity = parseInt(newQuantity);
+    if(newPrice) item.Price = parseFloat(newPrice);
+    if(newCategory) item.Category = newCategory;
+
+    renderItems(items);
+}
+
+// Search items
+document.getElementById("searchForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const name = document.getElementById("searchName").value.toLowerCase();
+    const category = document.getElementById("searchCategory").value.toLowerCase();
+
+    const results = items.filter(item => {
+        return (!name || item.Name.toLowerCase().includes(name)) &&
+               (!category || item.Category.toLowerCase().includes(category));
+    });
+
+    renderItems(results);
+});
+
+// Initial display
+displayAllItems();
+</script>
+</body>
+</html>
