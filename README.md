@@ -24,7 +24,8 @@ It serves as a basic prototype for a front-end inventory tracking tool, allowing
 ## 🌐 Live Demo
 
 You can view a live demonstration of this project here: 
-👉 **https://soheibkaddouri.github.io/supermarket-inventory-project/**
+
+https://github.com/user-attachments/assets/cf3354eb-270e-4a90-bde9-90e9e45e3aaa
 
 ## ⚙️ Setup and Installation (For Local Use)
 
@@ -36,6 +37,3 @@ This project requires no complex installation or dependencies.
     ```
 2.  **Open the file:** Navigate to the cloned folder and simply open the `index.html` file in any modern web browser.
 
-## 🖼️ Screenshot
-
-![Supermarket Inventory Application Screenshot](images/screenshot.png)
