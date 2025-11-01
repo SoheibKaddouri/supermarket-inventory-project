@@ -46,6 +46,6 @@ This project is deployed and hosted for free using **GitHub Pages**.
 > https://soheibkaddouri.github.io/supermarket-inventory-project/
 
 **View the Repository Here:**
-> https://github.com/SoheibKaddouri/supermarket-inventory-projec/
+> https://github.com/SoheibKaddouri/supermarket-inventory-project
 
 ---
