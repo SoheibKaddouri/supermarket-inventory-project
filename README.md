@@ -37,3 +37,15 @@ This project requires no complex installation or dependencies.
     ```
 2.  **Open the file:** Navigate to the cloned folder and simply open the `index.html` file in any modern web browser.
 
+
+## 🔗 Live Site (Deployment)
+
+This project is deployed and hosted for free using **GitHub Pages**.
+
+**View the Live Site Here:**
+> https://soheibkaddouri.github.io/supermarket-inventory-project/
+
+**View the Repository Here:**
+> https://github.com/SoheibKaddouri/supermarket-inventory-projec/
+
+---
