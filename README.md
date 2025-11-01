@@ -33,9 +33,15 @@ This project requires no complex installation or dependencies.
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/SoheibKaddouri/supermarket-inventory-project.git](https://github.com/SoheibKaddouri/supermarket-inventory-project.git)
+   git clone [https://github.com/SoheibKaddouri/supermarket-inventory-project.git](https://github.com/SoheibKaddouri/supermarket-inventory-project.git)
     ```
-2.  **Open the file:** Navigate to the cloned folder and simply open the `index.html` file in any modern web browser.
+2.  **Navigate to the project directory:**
+    ```bash
+    cd supermarket-inventory-project
+    ```
+3.  **Open the file:**
+    Open the `index.html` file directly in your web browser.
+
 
 
 ## 🔗 Live Site (Deployment)
